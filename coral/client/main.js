@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 import App from '../imports/ui/components/App';
-import Info from '../imports/ui/components/Info';
+import List from '../imports/ui/components/List';
 
 import './main.html';
 
@@ -20,7 +20,7 @@ const renderRoutes = () => (
                   component={App}
                   // currentUserId={Meteor.userId()}
               />
-              {/* <Route exact path="/info" component={Info} /> */}
+              <Route exact path="/list" component={List} />
               {/* <Route path="*" component={NotFound} /> */}
           </Switch>
       </div>
