@@ -1,22 +1,35 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import React, {Component} from 'react';
+import {Meteor} from 'meteor/meteor';
+import {render} from 'react-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+
+import App from '../imports/ui/components/App';
+import Info from '../imports/ui/components/Info';
 
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
+const renderRoutes = () => (
+  <Router>
+      <div>
+          <Switch>
+              <Route
+                  exact
+                  path="/"
+                  component={App}
+                  // currentUserId={Meteor.userId()}
+              />
+              {/* <Route exact path="/info" component={Info} /> */}
+              {/* <Route path="*" component={NotFound} /> */}
+          </Switch>
+      </div>
+  </Router>
+);
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
+
+
+Meteor.startup(()=>{
+  render(renderRoutes(), document.getElementById('app'));
+})
+
